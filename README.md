@@ -83,5 +83,76 @@ npm install --save-dev babel-loader
         });
       }
   };
+```
 
+9. Destructuring Assignment
+```javascript
+ var sandwich = {
+   title : "Reuben",
+   price : 7,
+   description : "Cleveland's favorite sandwich",
+   ingredients : ['bread', 'corned beef', 'dressing', 'sauerkraut', 'cheese']
+ };
+ console.log(sandwich.title);
+ console.log(sandwich.price);
+ var {title, price} = {
+   title : "Reuben",
+   price : 7,
+   description : "Cleveland's favorite sandwich",
+   ingredients : ['bread', 'corned beef', 'dressing', 'sauerkraut', 'cheese']
+ }
+ console.log(title);
+ console.log(price);
+
+ var vacation = {
+   destination : "Chile",
+   travelers : 2,
+   activity   : "skiing",
+   cost : 4000,
+ }
+ function vacationMarketing({destination, activity}){
+   return `Come to ${destination} and do some ${activity}`
+ }
+ console.log(vacationMarketing(vacation))
+ ```
+ 10. Generator
+ babel의 browser-polyfill.js 추가
+```javascript
+  function* eachItem(arr) {
+    for(var i=0; i<arr.length; i++){
+      yield arr[i];
+    }
+  }
+  var letters = eachItem(["a", "b", "c", "d", "e", "f", "g"]);
+  var abcs = setInterval(function(){
+    var letter = letters.next();
+    if(letter.done){
+      clearInterval(abcs);
+      console.log("Now i know my abcs");
+    } else {
+      console.log(letter.value)
+    }
+  }, 500);
+```
+11. Classes
+```javascript
+  class Vehicle {
+    constructor(description, wheels){
+      this.description = description;
+      this.wheels = wheels;
+    }
+    describeYourself(){
+      console.log(`I am a ${this.description} with ${this.wheels} wheels`);
+    }
+  }
+  var coolSkiVan = new Vehicle("cool ski van", 4);
+  coolSkiVan.describeYourself();
+
+  class SemiTruck extends Vehicle{
+    constructor(){
+      super("semi truck", 18);
+    }
+  }
+  var groceryStoreSemi = new SemiTruck();
+  groceryStoreSemi.describeYourself();
 ```
